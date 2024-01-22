@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "recepies")
 public class Recipe {
@@ -31,8 +33,20 @@ public class Recipe {
     @Min(value = 1, message = "Portion can't be lower than 1")
     private Integer portion;
 
+    @ManyToMany
+    private List<Category> categories;
+
 
     // GETTER E SETTER
+
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
 
     public Integer getId() {
         return id;
