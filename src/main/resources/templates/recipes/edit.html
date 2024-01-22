@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/resources :: head('Recepie Details')"></head>
+<body>
+
+<main>
+    <div class="container">
+        <h1 class="text-center mt-3" th:text="|Fill the form to edit ${recipe.title} recipe|"></h1>
+        <section>
+            <form id="edit-recipe" th:object="${recipe}" th:action="@{/recipes/edit/{id}(id=${recipe.id})}" method="post" class="row g-3">
+
+                <!-- Campi per le informazioni della Ricetta -->
+                <div class="col-8">
+                    <div class="col-md-6">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" th:field="*{title}" th:errorClass="is-invalid">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="preparationTime" class="form-label">Preparation Time (HH:mm)</label>
+                        <input type="text" class="form-control" id="preparationTime" th:field="*{preparationTime}"
+                               th:errorClass="is-invalid">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('preparationTime')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('preparationTime')}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="portion" class="form-label">Portions</label>
+                        <input type="number" class="form-control" id="portion" th:field="*{portion}"
+                               th:errorClass="is-invalid">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('portion')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('portion')}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="ingredientList" class="form-label">Ingredients</label>
+                        <textarea class="form-control" rows="10" id="ingredientList" th:field="*{ingredientList}"
+                                  th:errorClass="is-invalid"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('ingredientList')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('ingredientList')}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottoni del form -->
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a class="btn btn-danger" th:href="@{/recipes}">Cancel</a>
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+
+<th:block th:replace="fragments/resources :: script"></th:block>
+</body>
+</html>

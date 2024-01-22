@@ -3,6 +3,10 @@
 <head th:replace="fragments/resources :: head('Recepie Details')"></head>
 <body>
 
+<header>
+    <nav th:replace="fragments/navbar :: topNavbar('recipes')"></nav>
+</header>
+
 <main>
     <div class="container">
         <h1 class="text-center mt-3" th:text="|${recipe.title} Details|"></h1>
@@ -13,6 +17,8 @@
                     <h4 class="card-title" th:text="${recipe.title}"></h4>
                     <h5 class="card-title">Ingredients</h5>
                     <p class="card-text" th:text="${recipe.ingredientList}"></p>
+                    <h5 class="card-title">Portion</h5>
+                    <p class="card-text" th:text="${recipe.portion}"></p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Categories</li>

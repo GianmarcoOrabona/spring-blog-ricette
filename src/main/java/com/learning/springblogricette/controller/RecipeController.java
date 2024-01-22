@@ -56,6 +56,29 @@ public class RecipeController {
         }
     }
 
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        Optional<Recipe> result = recipeRepository.findById(id);
+        if (result.isPresent()) {
+            model.addAttribute("recipe", result.get());
+            return "recipes/edit";
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe with id " + id + " not found");
+        }
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute("recipe") Recipe formRecipe, BindingResult bindingResult, Model mdoel) {
+        Optional<Recipe> result = recipeRepository.findById(id);
+        if (result.isPresent()) {
+            Recipe recipeToEdit = result.get();
+            Recipe savedRecipe = recipeRepository.save(formRecipe);
+            return "redirect:/recipes/show/" + id;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe with id " + id + " not found");
+        }
+    }
+
 
 
 
