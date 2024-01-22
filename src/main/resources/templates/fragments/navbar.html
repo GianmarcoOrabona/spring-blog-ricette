@@ -18,7 +18,7 @@
                     <a class="nav-link" th:classappend="${area == 'categories' ? 'active' : ''}" th:href="@{/categories}">Categories</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search" id="recipe-search" th:action="@{/recipes}" method="get">
+            <form class="d-flex" role="search" id="recipe-search" th:action="@{/}" method="get">
                 <input class="form-control me-2" type="search" placeholder="Search a recipe" aria-label="Search" name="keyword" id="keyword" th:value="${preloadSearch}">
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
