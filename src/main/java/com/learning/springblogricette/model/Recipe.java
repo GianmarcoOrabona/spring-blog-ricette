@@ -35,6 +35,14 @@ public class Recipe {
         this.id = id;
     }
 
+    public String getIngredientList() {
+        return ingredientList;
+    }
+
+    public void setIngredientList(String ingredientList) {
+        this.ingredientList = ingredientList;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -59,11 +67,11 @@ public class Recipe {
         this.preparationTime = preparationTime;
     }
 
-    public String getIngredientList() {
-        return ingredientList;
+    public Integer getPortion() {
+        return portion;
     }
 
-    public void setIngredientList(String ingredientList) {
-        this.ingredientList = ingredientList;
+    public void setPortion(Integer portion) {
+        this.portion = portion;
     }
 }
