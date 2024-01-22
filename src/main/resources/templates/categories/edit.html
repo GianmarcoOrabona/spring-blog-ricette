@@ -9,7 +9,31 @@
 
 <main>
     <div class="container">
+        <section>
+            <form id="edit-category" th:object="${category}" th:action="@{/categories/edit/{id}(id=${category.id})}"
+                  method="post" class="row g-3">
 
+                <!-- Campi per le informazioni della Categoria -->
+                <div class="col-8">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}"
+                               th:errorClass="is-invalid">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottoni del form -->
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a class="btn btn-danger" th:href="@{/categories}">Cancel</a>
+                </div>
+            </form>
+        </section>
     </div>
 </main>
 
