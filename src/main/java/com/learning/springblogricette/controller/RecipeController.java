@@ -26,9 +26,15 @@ public class RecipeController {
     private CategoryRepository categoryRepository;
 
     @GetMapping
-    private String index(Model model) {
-        List<Recipe> recipeList = recipeRepository.findAll();
+    private String index(@RequestParam(name = "keyword", required = false) String searchKeyword, Model model) {
+        List<Recipe> recipeList;
+        if (searchKeyword != null) {
+            recipeList = recipeRepository.findByTitleContaining(searchKeyword);
+        } else {
+            recipeList = recipeRepository.findAll();
+        }
         model.addAttribute("recipeList", recipeList);
+        model.addAttribute("preloadSearch", searchKeyword);
         return "recipes/list";
     }
 
