@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,5 +64,17 @@ public class CategoryController {
         }
         Category updatedIngredient = categoryRepository.save(formCategory);
         return "redirect:/categories";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        Optional<Category> result = categoryRepository.findById(id);
+        redirectAttributes.addFlashAttribute("redirectMessage", "Category " + result.get().getName() + ", deleted!");
+        if (result.isPresent()) {
+            categoryRepository.deleteById(id);
+            return "redirect:/categories";
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category with id " + id + " not found");
+        }
     }
 }

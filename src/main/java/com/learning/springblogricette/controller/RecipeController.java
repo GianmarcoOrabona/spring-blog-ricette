@@ -89,7 +89,7 @@ public class RecipeController {
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         Optional<Recipe> result = recipeRepository.findById(id);
-        redirectAttributes.addFlashAttribute("redirectMessage", result.get().getTitle() + " recipe, deleted!");
+        redirectAttributes.addFlashAttribute("redirectMessage",  "Recipe " + result.get().getTitle() + ", deleted!");
         if (result.isPresent()) {
             recipeRepository.deleteById(id);
             return "redirect:/recipes";
