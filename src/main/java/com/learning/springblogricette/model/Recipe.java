@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -33,12 +34,33 @@ public class Recipe {
     @Min(value = 1, message = "Portion can't be lower than 1")
     private Integer portion;
 
+    @NotEmpty(message = "Recipe procedure must not be blank")
+    @Lob
+    private String recipeProcedure;
+
+    private LocalDateTime createdAt;
+
     @ManyToMany
     private List<Category> categories;
 
 
     // GETTER E SETTER
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getRecipeProcedure() {
+        return recipeProcedure;
+    }
+
+    public void setRecipeProcedure(String recipeProcedure) {
+        this.recipeProcedure = recipeProcedure;
+    }
 
     public List<Category> getCategories() {
         return categories;
