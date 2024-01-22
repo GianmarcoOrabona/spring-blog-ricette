@@ -41,8 +41,8 @@
                                 class="fa-solid fa-eye"></i></a>
                         <a class="btn btn-primary" th:href="@{/recipes/edit/{id}(id=${recipe.id})}"><i
                                 class="fa-solid fa-pencil"></i></a>
-                        <form th:action="@{/}" method="post"
-                              onsubmit="return confirm('Are you sure, you want to delete this pizza?')">
+                        <form th:action="@{/recipes/delete/{id}(id=${recipe.id})}" method="post"
+                              onsubmit="return confirm('Are you sure, you want to delete this recipe?')">
                             <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
                         </form>
                     </td>
