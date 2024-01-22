@@ -1,8 +1,7 @@
 package com.learning.springblogricette.model;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "recepies")
@@ -13,12 +12,16 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty(message = "Ingredients list must not be blank")
+    private String ingredientList;
+
     private String title;
 
     @Lob
     private String img;
 
-    private LocalDateTime preparationTime;
+    private String preparationTime;
+
 
     // GETTER E SETTER
 
@@ -46,11 +49,19 @@ public class Recipe {
         this.img = img;
     }
 
-    public LocalDateTime getPreparationTime() {
+    public String getPreparationTime() {
         return preparationTime;
     }
 
-    public void setPreparationTime(LocalDateTime preparationTime) {
+    public void setPreparationTime(String preparationTime) {
         this.preparationTime = preparationTime;
+    }
+
+    public String getIngredientList() {
+        return ingredientList;
+    }
+
+    public void setIngredientList(String ingredientList) {
+        this.ingredientList = ingredientList;
     }
 }
