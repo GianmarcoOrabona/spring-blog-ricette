@@ -22,6 +22,8 @@ public class Recipe {
 
     private String preparationTime;
 
+    private Integer portion;
+
 
     // GETTER E SETTER
 
