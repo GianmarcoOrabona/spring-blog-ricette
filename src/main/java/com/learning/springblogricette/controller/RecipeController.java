@@ -1,6 +1,7 @@
 package com.learning.springblogricette.controller;
 
 import com.learning.springblogricette.model.Recipe;
+import com.learning.springblogricette.repository.CategoryRepository;
 import com.learning.springblogricette.repository.RecipeRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ import java.util.Optional;
 public class RecipeController {
     @Autowired
     private RecipeRepository recipeRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @GetMapping
     private String index(Model model) {
@@ -44,12 +48,14 @@ public class RecipeController {
     public String create(Model model) {
         Recipe recipe = new Recipe();
         model.addAttribute("recipe", recipe);
+        model.addAttribute("categoryList", categoryRepository.findAll());
         return "recipes/create";
     }
 
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("recipe") Recipe formRecipe, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("categoryList", categoryRepository.findAll());
             return "recipes/create";
         } else {
             Recipe savedRecipe = recipeRepository.save(formRecipe);
