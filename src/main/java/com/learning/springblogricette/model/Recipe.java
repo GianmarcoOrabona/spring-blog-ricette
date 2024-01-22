@@ -1,7 +1,10 @@
 package com.learning.springblogricette.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "recepies")
@@ -15,13 +18,17 @@ public class Recipe {
     @NotEmpty(message = "Ingredients list must not be blank")
     private String ingredientList;
 
+    @NotEmpty(message = "Title must not be blank")
     private String title;
 
     @Lob
     private String img;
 
+    @NotEmpty(message = "Insert a valid preparation time, HH:mm")
     private String preparationTime;
 
+    @NotNull(message = "Portion must not be blank")
+    @Min(value = 1, message = "Portion can't be lower than 1")
     private Integer portion;
 
 
